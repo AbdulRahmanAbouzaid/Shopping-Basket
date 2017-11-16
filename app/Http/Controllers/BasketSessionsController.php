@@ -90,6 +90,8 @@ class BasketSessionsController extends Controller
             
         }
 
+        session()->forget('products');
+
         return redirect('/basket/invoice/'.$invoice->id);
 
     }
