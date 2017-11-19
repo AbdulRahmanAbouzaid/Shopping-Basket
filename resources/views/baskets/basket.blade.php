@@ -117,8 +117,8 @@
 
 						<div class="row">
 							<center>
-								<a class="btn btn-default update" href="/basket/confirm-purchase">Confirm Purchasing</a>
-								<a class="btn btn-default update" href="/basket/cancel">Cancel</a>
+								<a class="btn btn-default update" href="/basket/invoice">Show Invoice</a>
+								<a class="btn btn-default update" href="/basket/destroy">Cancel</a>
 							</center>
 						</div>
 					</div>

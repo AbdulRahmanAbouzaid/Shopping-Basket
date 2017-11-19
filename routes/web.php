@@ -21,7 +21,7 @@ Route::get('/home', function () {
 
 
 
-Route::get('/session', 'BasketSessionsController@index');
+Route::get('/test', 'BasketSessionsController@test');
 
 
 /* Routes for Register, Login and Logout */
@@ -74,12 +74,14 @@ Route::post('/basket/add-product/{product}','BasketSessionsController@addProduct
 
 Route::post('/basket/updateQuantity', 'BasketSessionsController@updateQuantity');
 
-Route::get('/basket/confirm-purchase','BasketSessionsController@confirmPurchase');
-
-Route::get('/basket/invoice/{invoice}','BasketSessionsController@showInvoice');
-
 Route::get('/basket/delete-products/{code}', 'BasketSessionsController@detachProduct');
 
-Route::get('/basket/cancel', 'BasketSessionsController@cancelling');
+Route::get('/basket/invoice','BasketSessionsController@prepareInvoice');
+
+Route::get('/basket/invoice/show','BasketSessionsController@showInvoice');
+
+Route::get('/basket/confirm-purchase', 'BasketSessionsController@confirmPurchase');
+
+Route::get('/basket/destroy', 'BasketSessionsController@destroy');
 
 

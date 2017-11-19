@@ -16,22 +16,20 @@ class Invoices{
 
  public function create(Baskets $basket)
  {
-  
-  $invoice = Invoice::create([
 
-            'inv_number' => hexdec(uniqid()),
+ 	$invoice = new Invoice;
 
-            'user_id' => auth()->id(),
+  	$invoice->inv_number = hexdec(uniqid());
 
-            'inv_total' => $basket->totalActualPrice(),
+  	$invoice->user_id = auth()->id();
 
-            'inv_discount' => $basket->discountPercentage(),
+  	$invoice->inv_total = $basket->totalActualPrice();
 
-            'inv_net' => $basket->basketTotalPrice()
+  	$invoice->inv_discount = $basket->discountPercentage();
 
-        ]);
+  	$invoice->inv_net = $basket->basketTotalPrice();
 
-        return $invoice;
+  	session(['invoice' => $invoice]);
 
  }
 

@@ -33,25 +33,25 @@
 
 								<td class="cart_product">
 
-									<h4> {{$invoice->inv_number}} </h4>
+									<h4> {{ $invoice['inv_number'] }} </h4>
 
 								</td>
 
 								<td class="cart_description">
 
-									<h4> $ {{number_format($invoice->inv_total, 2)}} </h4>
+									<h4> $ {{ number_format($invoice['inv_total'], 2) }} </h4>
 
 								</td>
 
 								<td class="cart_price">
 
-									<h4> {{number_format($invoice->inv_discount, 2)}} % </h4>
+									<h4> {{ number_format($invoice['inv_discount'], 2) }} % </h4>
 
 								</td>
 
 								<td class="cart_quantity">
 
-									<h4> $ {{number_format($invoice->inv_net, 2)}} </h4>
+									<h4> $ {{ number_format($invoice['inv_net'], 2) }} </h4>
 
 								</td>
 
@@ -65,6 +65,23 @@
 
 		</div>
 
-	</section> <!--/#cart_items-->
+	</section> 
+
+	<section>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<center>
+						<a class="btn btn-default update" href="/basket/confirm-purchase">Confirm Purchasing</a>
+						<a class="btn btn-default update" href="/basket">Back To Basket</a>
+					</center>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+
 
 @endsection

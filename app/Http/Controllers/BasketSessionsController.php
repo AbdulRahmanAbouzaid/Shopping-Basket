@@ -8,6 +8,7 @@ use App\Repositories\Baskets;
 use App\Repositories\Invoices;
 use App\Invoice;
 use App\Product;
+use App\Mail\PurchasingReport;
 
 class BasketSessionsController extends Controller
 {
@@ -79,36 +80,55 @@ class BasketSessionsController extends Controller
  
 
     // Confirm Purchasing and Create its Invoice 
-    public function confirmPurchase(Invoices $invoice)
+    public function prepareInvoice(Invoices $invoice)
     {
 
         $invoice = $invoice->create($this->basket);
 
-        foreach ($this->basket->getAllProducts() as $product) {
+        $products = $this->basket->getAllProducts();
+
+        foreach ($products as $product) {
 
             $this->basket->decreaseQuantity($product['code'], $product['quantity']);
             
         }
 
-        session()->forget('products');
-
-        return redirect('/basket/invoice/'.$invoice->id);
+        return redirect('/basket/invoice/show');
 
     }
 
 
     // show the Invoice for the User
-    public function showInvoice(Invoice $invoice)
+    public function showInvoice()
     {
+
+        $invoice = session('invoice');
 
         return view('baskets.invoice', compact('invoice'));
 
     }
 
 
+    public function confirmPurchase()
+    {
+        $invoice = session('invoice');
+
+        $invoice->save();
+
+        $products = session('products');
+
+        \Mail::to(auth()->user())->send(new PurchasingReport($invoice, $products));
+
+        session()->forget('products');
+
+        session()->forget('invoice');
+
+        return redirect('/');
+    }
+
 
     //Cancel The Basket  
-    public function cancelling()
+    public function destroy()
     {
         
         session()->forget('products');
