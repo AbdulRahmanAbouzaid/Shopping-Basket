@@ -1,9 +1,6 @@
 @component('mail::message')
 # Introduction
 
-Hello,
-We hope you are happy to visit our Website, here is your last purchasing activity
-
 @component('mail::table')
 |    Product Name     |    Ordered quantity	   |          Price     	   |
 |:--------------------|:----------------------:|:-------------------------:|

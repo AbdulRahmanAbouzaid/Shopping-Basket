@@ -11,8 +11,15 @@
 
 				<div class="view-product">
 
-					<img src="/images/product-details/1.jpg" alt="" /> <!--  Product Image -->
+					@if(!empty($product->image))
 
+						<img src="{{$product->image}}" alt="{{$product->image}}" />
+					
+					@else
+
+						<img src="/images/product-details/1.jpg" alt="" /> <!--  Product Image -->
+					
+					@endif
 				</div>
 
 			</div>

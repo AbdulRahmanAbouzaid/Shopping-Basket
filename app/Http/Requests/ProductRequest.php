@@ -32,7 +32,8 @@ class ProductRequest extends FormRequest
         return [
             
             'discount_pct' => 'integer|between:0,100',
-            'price' => 'numeric|min:1'
+            'price' => 'numeric|min:1',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
 
         ];
     }
@@ -60,14 +61,34 @@ class ProductRequest extends FormRequest
 
     public function saving()
     {
-        $product = Product::create($this->only(
-           
-            ['code', 'name', 'price', 'quantity', 'discount_pct'])
+
+        $imageExtension = request()->file('image')->extension();
+
+        $imageName = $this->only('name')['name'] . $this->only('code')['code'] .'.'. $imageExtension ;
+
+        $imagePath = '/storage/products-images/'.$imageName;
+
+        request()->file('image')->storeAs('public/products-images', $imgName);
+
+        $product = new Product([
+
+            'code' => $this->only('code')['code'],
+
+            'name' => $this->only('name')['name'],
+
+            'discount_pct' => $this->only('discount_pct')['discount_pct'],
+
+            'price' => $this->only('price')['price'],
+
+            'quantity' => $this->only('quantity')['quantity'],
+
+            'image' => $imagePath
        
-        );
+        ]);
 
         $product->save();
 
         $product->categories()->attach(request('category'));
+
     }
 }

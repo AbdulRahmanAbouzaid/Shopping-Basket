@@ -17,7 +17,7 @@
 
 			@include('layouts.errors')
 
-	    	<form id="main-contact-form" class="contact-form row" name="contact-form" method="post" action="/products">
+	    	<form id="main-contact-form" class="contact-form row" name="contact-form" method="post" action="/products" enctype="multipart/form-data">
 
 	    		{{ csrf_field() }}
 
@@ -58,7 +58,7 @@
 	            
 	            	<label for="quantity" class="col-md-4">Quantity</label>
 	            
-	                <input type="number" name="quantity" class="col-md-8" required="required" placeholder="Subject">
+	                <input type="number" name="quantity" class="col-md-8" required="required" placeholder="Quantity">
 	            
 	            </div>    
 
@@ -77,6 +77,14 @@
 	                 </div>
 	           
 	            </div> 
+
+	            <div class="form-group col-md-8">
+
+					<label for="image">Select image to upload </label>
+
+					<input type="file" name="image" accept="image/*">
+		          
+		        </div>
 
 	            
 	            <div class="form-group col-md-12">

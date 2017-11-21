@@ -9,6 +9,7 @@ use App\Repositories\Invoices;
 use App\Invoice;
 use App\Product;
 use App\Mail\PurchasingReport;
+use App\Events\InvoiceCreated;
 
 class BasketSessionsController extends Controller
 {
@@ -24,6 +25,14 @@ class BasketSessionsController extends Controller
 
 
 	}
+
+
+    public function test()
+    {
+
+        // return asset('storage/file.txt');
+        // return storage_path('app/public/file.txt');
+    }
     
 
     // Show the User's Basket
@@ -111,17 +120,14 @@ class BasketSessionsController extends Controller
 
     public function confirmPurchase()
     {
+
         $invoice = session('invoice');
 
         $invoice->save();
 
         $products = session('products');
 
-        \Mail::to(auth()->user())->send(new PurchasingReport($invoice, $products));
-
-        session()->forget('products');
-
-        session()->forget('invoice');
+        event(new InvoiceCreated($products, $invoice));
 
         return redirect('/');
     }
