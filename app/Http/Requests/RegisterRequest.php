@@ -39,6 +39,8 @@ class RegisterRequest extends FormRequest
 
                 'name' => $this->get('name'),
 
+                'email' => $this->get('email'),
+
                 'password' => \Hash::make($this->get('password')),
 
                 'is_admin' => false

@@ -26,7 +26,7 @@
 
 							<input type="text" name="name" placeholder="Enter Your User Name" required />
 
-							<input type="password" name="password" placeholder="Email Address" required />
+							<input type="password" name="password" placeholder="Password" required />
 
 							<button type="submit" class="btn btn-default">Login</button>
 
@@ -54,6 +54,8 @@
 							{{ csrf_field() }}
 
 							<input type="text" name="name" placeholder="Name" required/>
+
+							<input type="email" name="email" placeholder="Email" required/>
 
 							<input type="password" name="password" placeholder="Password" required/>
 							
